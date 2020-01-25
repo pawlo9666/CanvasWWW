@@ -8,114 +8,143 @@
     <link rel= "stylesheet" href="css/bootstrap.min.css"/>
 
 
+
 </head>
 <body>
 <div class="main">
-    <nav class="navbar navbar-dark bg-info mb-5">
+    <nav class="navbar navbar-dark mb-5">
         <div class="container">
-            <a href="#" class="navbar-brand">Image Filter</a>
+            <a href="#" class="navbar-brand">Filtry Canvas</a>
         </div>
     </nav>
     <div class="container">
+
+
         <div class="row">
-            <div class="col-md-8 m-auto">
+            <div class="col-md-6 m-auto">
                 <div class="custom-file mb-3">
-                    <input type="file" class="custom-file-input" id="upload-file">
-                    <label for="upload-file" class="custom-file-label">Choose Image</label>
+                    <input type="file" class="custom-file-input" id="wgraj">
+                    <label for="wgraj" class="custom-file-label">Wybierz obraz</label>
                 </div>
                 <canvas id="canvas"></canvas>
 
-                <h4 class="text-center my-3">Filters</h4>
 
+                <div class="row">
+                    <div class="custom-file mb-3">
+                        <button id="przyklad" name="obr/obr.png" class="btn  btn-secondary">Przykład</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 m-auto">
+                <h4 class="text-center my-3">Efekty</h4>
                 <div class="row my-4 text-center">
                     <div class="col-md-3">
                         <div class="btn-group btn-group-sm">
-                            <button class="filter-btn brightness-remove btn btn-info">-</button>
-                            <button class="btn btn-secondary btn-disabled" disabled>Brightness</button>
-                            <button class="filter-btn brightness-add btn btn-info">+</button>
+                            <button class="filtr jasnosc-odejmij btn btn-info">-</button>
+                            <button class="btn btn-secondary btn-disabled" disabled>Jasność</button>
+                            <button class="filtr jasnosc-dodaj btn btn-info">+</button>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="btn-group btn-group-sm">
-                            <button class="filter-btn contrast-remove btn btn-info">-</button>
-                            <button class="btn btn-secondary btn-disabled" disabled>Contrast</button>
-                            <button class="filter-btn contrast-add btn btn-info">+</button>
+                            <button class="filtr kontrast-odejmij btn btn-info">-</button>
+                            <button class="btn btn-secondary btn-disabled" disabled>Kontrast</button>
+                            <button class="filtr kontrast-dodaj btn btn-info">+</button>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="btn-group btn-group-sm">
-                            <button class="filter-btn saturation-remove btn btn-info">-</button>
-                            <button class="btn btn-secondary btn-disabled" disabled>Saturation</button>
-                            <button class="filter-btn saturation-add btn btn-info">+</button>
+                            <button class="filtr saturacja-odejmij btn btn-info">-</button>
+                            <button class="btn btn-secondary btn-disabled" disabled>Saturacja</button>
+                            <button class="filtr saturacja-dodaj btn btn-info">+</button>
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="btn-group btn-group-sm">
-                            <button class="filter-btn vibrance-remove btn btn-info">-</button>
+                            <button class="filtr vibrance-odejmij btn btn-info">-</button>
                             <button class="btn btn-secondary btn-disabled" disabled>Vibrance</button>
-                            <button class="filter-btn vibrance-add btn btn-info">+</button>
+                            <button class="filtr vibrance-dodaj btn btn-info">+</button>
                         </div>
                     </div>
                 </div>
-                <!-- ./row -->
 
-                <h4 class="text-center my-3">Effects</h4>
+                <h4 class="text-center my-3">Filtry</h4>
 
                 <div class="row mb-3">
                     <div class="col-md-3">
-                        <button class="filter-btn vintage-add btn btn-dark btn-block">
+                        <button class="filtr vintage btn btn-dark btn-block">
                             Vintage
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="filter-btn lomo-add btn btn-dark btn-block">
+                        <button class="filtr lomo btn btn-dark btn-block">
                             Lomo
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="filter-btn clarity-add btn btn-dark btn-block">
+                        <button class="filtr clarity btn btn-dark btn-block">
                             Clarity
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="filter-btn sincity-add btn btn-dark btn-block">
+                        <button class="filtr sinCity btn btn-dark btn-block">
                             Sin City
                         </button>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-3">
-                        <button class="filter-btn crossprocess-add btn btn-dark btn-block">
-                            Cross Process
+                        <button class="filtr hermajesty btn btn-dark btn-block">
+                           herMajesty
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="filter-btn pinhole-add btn btn-dark btn-block">
-                            Pinhole
+                        <button class="filtr crossprocess btn btn-dark btn-block">
+                            crossprocess
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="filter-btn nostalgia-add btn btn-dark btn-block">
-                            Nostalgia
+                        <button class="filtr pinhole btn btn-dark btn-block">
+                            pinhole
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button class="filter-btn hermajesty-add btn btn-dark btn-block">
-                            Her Majesty
+                        <button class="filtr nostalgia btn btn-dark btn-block">
+                            nostalgia
                         </button>
                     </div>
                 </div>
 
+                <h4 class="text-center my-3">Figury</h4>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <button class="filtr kwadrat btn btn-dark btn-block">
+                            kwadrat
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="filtr serduszka btn btn-dark btn-block">
+                            serduszka
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="filtr strzalka btn btn-dark btn-block">
+                            strzałki
+                        </button>
+                    </div>
+
+                </div>
+
+
+
                 <div class="row mt-5">
                     <div class="col-md-6">
-                        <button id="download-btn" class="btn btn-primary btn-block">Download Image</button>
+                        <button id="pobierz" class="btn btn-primary btn-block">Pobierz obraz</button>
                     </div>
                     <div class="col-md-6">
-                        <button id="revert-btn" class="btn btn-danger btn-block">Remove Filters</button>
+                        <button id="usun" class="btn btn-danger btn-block">Usuń filtry</button>
                     </div>
                 </div>
             </div>

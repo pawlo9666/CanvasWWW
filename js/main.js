@@ -1,156 +1,219 @@
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
-let img = new Image();
-let fileName = "";
+let obraz = new Image();
+let nazwapliku = '';
 
-const downloadBtn = document.getElementById("download-btn");
-const uploadFile = document.getElementById("upload-file");
-const revertBtn = document.getElementById("revert-btn");
+//przyciski
+const pobierz = document.getElementById('pobierz');
+const wgraj = document.getElementById('wgraj');
+const usun = document.getElementById('usun');
+const przyklad = document.getElementById('przyklad');
 
-// Filter & Effect Handlers
-document.addEventListener("click", e => {
-    if (e.target.classList.contains("filter-btn")) {
-        if (e.target.classList.contains("brightness-add")) {
-            Caman("#canvas", img, function() {
+przyklad.addEventListener('click' , (e) => {
+    //Tworzymy obraz
+    obraz = new Image();
+    obraz.src = "obr/obr.jpg";
+    //Po wgraniu dodaj do Canvasa
+    obraz.onload = function() {
+        canvas.width = obraz.width;
+        canvas.height = obraz.height;
+        ctx.drawImage(obraz, 0 , 0, obraz.width , obraz.height);
+        canvas.removeAttribute('data-caman-id');
+    };
+});
+
+// Dodaj filtry
+
+document.addEventListener('click', (e)=> {
+    //sprawdzamy po klasach czy wciśnięty przycisk zawiera klasę filtr i klasę dającą wybrany efekt
+    if(e.target.classList.contains('filtr')) {
+        if(e.target.classList.contains('jasnosc-dodaj')) {
+            Caman('#canvas', obraz, function() {
                 this.brightness(5).render();
             });
-        } else if (e.target.classList.contains("brightness-remove")) {
-            Caman("#canvas", img, function() {
+        }
+        if(e.target.classList.contains('jasnosc-odejmij')) {
+            Caman('#canvas', obraz, function() {
                 this.brightness(-5).render();
             });
-        } else if (e.target.classList.contains("contrast-add")) {
-            Caman("#canvas", img, function() {
-                this.contrast(5).render();
-            });
-        } else if (e.target.classList.contains("contrast-remove")) {
-            Caman("#canvas", img, function() {
-                this.contrast(-5).render();
-            });
-        } else if (e.target.classList.contains("saturation-add")) {
-            Caman("#canvas", img, function() {
-                this.saturation(5).render();
-            });
-        } else if (e.target.classList.contains("saturation-remove")) {
-            Caman("#canvas", img, function() {
-                this.saturation(-5).render();
-            });
-        } else if (e.target.classList.contains("vibrance-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if(e.target.classList.contains('vibrance-dodaj')) {
+            Caman('#canvas', obraz, function() {
                 this.vibrance(5).render();
             });
-        } else if (e.target.classList.contains("vibrance-remove")) {
-            Caman("#canvas", img, function() {
+        }
+        if(e.target.classList.contains('vibrance-odejmij')) {
+            Caman('#canvas', obraz, function() {
                 this.vibrance(-5).render();
             });
-        } else if (e.target.classList.contains("vintage-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("kontrast-dodaj")) {
+            Caman("#canvas", obraz, function() {
+                this.contrast(5).render();
+            });
+        }
+        if (e.target.classList.contains("kontrast-odejmij")) {
+            Caman("#canvas", obraz, function() {
+                this.contrast(-5).render();
+            });
+        }
+        if (e.target.classList.contains("saturacja-dodaj")) {
+            Caman("#canvas", obraz, function() {
+                this.saturation(5).render();
+            });
+        }
+        if (e.target.classList.contains("saturacja-odejmij")) {
+            Caman("#canvas", obraz, function() {
+                this.saturation(-5).render();
+            });
+        }
+        if (e.target.classList.contains("vintage")) {
+            Caman("#canvas", obraz, function() {
                 this.vintage().render();
             });
-        } else if (e.target.classList.contains("lomo-add")) {
-            Caman("#canvas", img, function() {
-                this.lomo().render();
-            });
-        } else if (e.target.classList.contains("clarity-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("clarity")) {
+            Caman("#canvas", obraz, function() {
                 this.clarity().render();
             });
-        } else if (e.target.classList.contains("sincity-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("lomo")) {
+            Caman("#canvas", obraz, function() {
+                this.lomo().render();
+            });
+        }
+        if (e.target.classList.contains("sinCity")) {
+            Caman("#canvas", obraz, function() {
                 this.sinCity().render();
             });
-        } else if (e.target.classList.contains("crossprocess-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("crossprocess")) {
+            Caman("#canvas", obraz, function() {
                 this.crossProcess().render();
             });
-        } else if (e.target.classList.contains("pinhole-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("pinhole")) {
+            Caman("#canvas", obraz, function() {
                 this.pinhole().render();
             });
-        } else if (e.target.classList.contains("nostalgia-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("nostalgia")) {
+            Caman("#canvas", obraz, function() {
                 this.nostalgia().render();
             });
-        } else if (e.target.classList.contains("hermajesty-add")) {
-            Caman("#canvas", img, function() {
+        }
+        if (e.target.classList.contains("hermajesty")) {
+            Caman("#canvas", obraz, function() {
                 this.herMajesty().render();
             });
         }
+        if (e.target.classList.contains("serduszka")) {
+            Caman("#canvas", obraz, function() {
+                var x=Math.random() * obraz.width;
+                var y=Math.random() * obraz.height;
+                ctx.beginPath();
+                ctx.moveTo(x+75,y+40);
+                ctx.fillStyle = "#FF0000";
+                ctx.bezierCurveTo(x+75,y+37,x+70,y+25,x+50,y+25);
+                ctx.bezierCurveTo(x+20,y+25,x+20,y+62.5,x+20,y+62.5);
+                ctx.bezierCurveTo(x+20,y+80,x+40,y+102,x+75,y+120);
+                ctx.bezierCurveTo(x+110,y+102,x+130,y+80,x+130,y+62.5);
+                ctx.bezierCurveTo(x+130,y+62.5,x+130,y+25,x+100,y+25);
+                ctx.bezierCurveTo(x+85,y+25,x+75,y+37,x+75,y+40);
+                ctx.fill()
+            });
+        }
+        if (e.target.classList.contains("kwadrat")) {
+            Caman("#canvas", obraz, function() {
+                var x=Math.random() * obraz.width;
+                var y=Math.random() * obraz.height;
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(x+25,y+25,100,100);
+                ctx.clearRect(x+45,y+45,60,60);
+                ctx.strokeRect(x+50,y+50,50,50);
+            });
+        }
+        if (e.target.classList.contains("strzalka")) {
+            Caman("#canvas", obraz, function() {
+                var x=Math.random() * obraz.width;
+                var y=Math.random() * obraz.height;
+                ctx.fillStyle = "#000000";
+                ctx.beginPath();
+                ctx.moveTo(x+75,y+50);
+                ctx.lineTo(x+100,y+75);
+                ctx.lineTo(x+100,y+25);
+                ctx.fill();
+            });
+        }
+
     }
 });
 
-// Revert Filters
-revertBtn.addEventListener("click", e => {
-    Caman("#canvas", img, function() {
-        this.revert();
+//Usun Filtry
+
+usun.addEventListener('click' , (e) => {
+    Caman('#canvas' , obraz , function(){
+       this.revert();
     });
 });
 
-// Upload File
-uploadFile.addEventListener("change", () => {
-    // Get File
-    const file = document.getElementById("upload-file").files[0];
-    // Init FileReader API
-    const reader = new FileReader();
+//Wgraj obrazek
+wgraj.addEventListener('change' , (e)=> {
+    const plik = document.getElementById('wgraj').files[0];
 
-    // Check for file
-    if (file) {
-        // Set file name
-        fileName = file.name;
-        // Read data as URL
-        reader.readAsDataURL(file);
+    // Czytnik plików
+    const czytnik = new FileReader();
+
+    if(plik) {
+        //Zmieniamy nazwę pliku
+        nazwapliku = plik.name;
+        //Bierze nazwe z pliku
+        czytnik.readAsDataURL(plik);
     }
 
-    // Add image to canvas
-    reader.addEventListener(
-        "load",
-        () => {
-            // Create image
-            img = new Image();
-            // Set image src
-            img.src = reader.result;
-            // On image load add to canvas
-            img.onload = function() {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0, img.width, img.height);
-                canvas.removeAttribute("data-caman-id");
-            };
-        },
-        false
-    );
+    czytnik.addEventListener('load', ()=> {
+        //Tworzymy obraz
+        obraz = new Image();
+        //Src
+        obraz.src = czytnik.result;
+        //Po wgraniu dodaj do Canvasa
+        obraz.onload = function() {
+            canvas.width = obraz.width;
+            canvas.height = obraz.height;
+            ctx.drawImage(obraz, 0 , 0, obraz.width , obraz.height);
+            canvas.removeAttribute('data-caman-id');
+        };
+    }, false);
 });
 
-// Download Event
-downloadBtn.addEventListener("click", () => {
-    // Get ext
-    const fileExtension = fileName.slice(-4);
 
-    // Init new filename
-    let newFilename;
+// Pobierz zmodyfikowany obrazek
+pobierz.addEventListener("click", () => {
+    //sprawdzrozszerzenie
+    const rozszerzenie = nazwapliku.slice(-4);
 
-    // Check image type
-    if (fileExtension === ".jpg" || fileExtension === ".png") {
-        // new filename
-        newFilename = fileName.substring(0, fileName.length - 4) + "-edited.jpg";
+    let nowanazwapliku;
+
+    //sprawdz typ
+    if (rozszerzenie === ".jpg" || rozszerzenie === ".png") {
+        nowanazwapliku = nazwapliku.substring(0, nazwapliku.length - 4) + "-edited.jpg";
     }
 
-    // Call download
-    download(canvas, newFilename);
+    //Wywołaj funkcje download
+    download(canvas, nowanazwapliku);
 });
 
 // Download
-function download(canvas, filename) {
-    // Init event
+function download(canvas, nazwapliku) {
+    //E jest wydarzeniem ,które później będzie inicjowane przez kliknięcie
     let e;
-    // Create link
+    //Utwórz link
     const link = document.createElement("a");
 
-    // Set props
-    link.download = filename;
+    link.download = nazwapliku;
     link.href = canvas.toDataURL("image/jpeg", 0.8);
-    // New mouse event
+    //kiedy wywołać funkcje
     e = new MouseEvent("click");
-    // Dispatch event
     link.dispatchEvent(e);
 }
